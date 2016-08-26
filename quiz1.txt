@@ -1,0 +1,106 @@
+"""
+    Возможные решения задач из первого домашнего задания.
+"""
+
+def exercise_1():
+    """
+    1. Запросить у пользователя строку и число (N) – вывести N первых символов из строки.
+    """
+    string = input('Введите строку: ')
+    number = input('Ввидете количество символвов: ')
+    number = int(number)
+    print('Новая строка:', string[:number])
+
+
+def exercise_2():
+    """
+    2. Дан список из 3-х строк (придумайте его сами) – необходимо в цикле вывести 
+    номер каждой строчки, саму строку и количество символов в ней через двоеточие.
+    """
+    my_list = [
+        'И даже не смей думать, что ты можешь не выдержать.',
+        'Самый трудный поединок — это когда за счастье приходится бороться с ленью.',
+        'Счастье не ищут, как золото или клад. '
+        'Его создают сами, те, у кого хватает сил, знания и любви.'
+    ]
+
+    for n, string in enumerate(my_list, 1):
+        print(n, string, len(string), sep=':')
+
+
+def exercise_3():
+    """
+    3. Запросить у пользователя число и написать делится ли оно на 10 без остатка.
+    """
+    number = input('Введите число: ')
+    number = int(number)
+
+    if number % 10:
+        print('Не делится на 10 без остатка')
+    else:
+        print('Делится на 10 без остатка')
+
+
+def exercise_4():
+    """
+    4. Написать функцию, которая принимает в качестве аргументов предложение и символ,
+    и возвращает список индексов, на которых буква встречается в строке (регистр не важен).
+    Например, если предложение "Мама мыла раму", а символ "м",
+    то функция должна вернуть список `[0, 2, 5, 12]`.
+    """
+
+    def get_letter_indexes(string, symbol):
+        # поскольку регистр не важем, то приведем все параметры к нижнему регистру
+        string = string.lower()
+        symbol = symbol.lower()
+
+        indexes = []
+
+        for n, char in enumerate(string):
+            if char == symbol:
+                indexes.append(n)
+
+        return indexes
+
+    assert get_letter_indexes('Мама Мыла Раму', 'м') == [0, 2, 5, 12], 'Не совпало!'
+
+
+def exercise_5():
+    """
+    5. Запросить у пользователя строку и вывести для каждой буквы количество
+    раз которое она встречается в строке.
+    """
+    string = input('Введите строку: ')
+
+    counters = {}
+
+    for char in string:
+        if char in counters:
+            counters[char] += 1
+        else:
+            counters[char] = 1
+
+    for char, count in counters.items():
+        print(char, count)
+
+
+def exercise_6():
+    """
+    6. Написать функцию, которая принимает на вход список строк и возвращает первую найденную
+    строку с максимальной длиной.
+    """
+    def find_string_with_max_length(list_of_strings):
+        max_length = 0
+        candidate_string = None
+
+        for string in list_of_strings:
+            # нашли строку длиннее
+            if len(string) > max_length:
+                candidate_string = string
+                max_length = len(string)
+
+        return candidate_string
+
+    print(find_string_with_max_length(
+        ['qwerty', 'abc', 'hello', 'rambler', '7777777']
+    ))
